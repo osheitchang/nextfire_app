@@ -15,13 +15,16 @@ const firebaseConfig = {
     measurementId: "G-T1DX5VMQ74"
   };
 
-if(firebase.apps.length){
+if(!firebase.apps.length){
     firebase.initializeApp(firebaseConfig)
 }
+
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 export const storage = firebase.storage();
+
+export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
   // Initialize Firebase
 
