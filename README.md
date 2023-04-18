@@ -1,4 +1,14 @@
+
+# Next JS application built to showcase the workflow between NextJs and the Firebase SDK
+
+> Created for educational purposes only
 <<<<<<< HEAD
+
+
+
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
