@@ -1,37 +1,50 @@
 import { auth, firestore, googleAuthProvider } from '../lib/firebase';
 import { UserContext } from '../lib/context';
+// import Metatags from '@components/Metatags'
+
 
 import { useEffect, useState, useCallback, useContext } from 'react';
 import debounce from 'lodash.debounce';
 
+
 export default function Enter(props) {
-  const { user, username } = useContext(UserContext);
+  const { user, username } = useContext(UserContext)
 
   // 1. user signed out <SignInButton />
   // 2. user signed in, but missing username <UsernameForm />
   // 3. user signed in, has username <SignOutButton />
+
   return (
     <main>
-      <Metatags title="Enter" description="Sign up for this amazing app!" />
-      {user ? !username ? <UsernameForm /> : <SignOutButton /> : <SignInButton />}
+      {/* <Metatags title="Enter" description="Sign up here" /> */}
+      {user ?
+        !username ? <UsernameForm /> : <SignOutButton />
+        :
+        <SignInButton />
+      }
     </main>
   );
 }
 
-// Sign in with Google button
+
+//sign in with Google Button
+
 function SignInButton() {
   const signInWithGoogle = async () => {
-    await auth.signInWithPopup(googleAuthProvider);
+    await auth.signInWithPopup(googleAuthProvider)
   };
 
   return (
+    <>
       <button className="btn-google" onClick={signInWithGoogle}>
-        <img src={'/google.png'} width="30px" /> Sign in with Google
+        <img src={"google.png"} /> sign in with Google
       </button>
-  );
+      <button className="btn-google" onClick={() => auth.signInAnonymously}>Sign in anonymously</button>
+    </>
+  )
 }
 
-// Sign out button
+//Sign Out button
 function SignOutButton() {
   return <button onClick={() => auth.signOut()}>Sign Out</button>;
 }
@@ -79,10 +92,11 @@ function UsernameForm() {
   };
 
   //
-
   useEffect(() => {
     checkUsername(formValue);
   }, [formValue]);
+
+
 
   // Hit the database for username match after each debounced change
   // useCallback is required for debounce to work
@@ -100,7 +114,7 @@ function UsernameForm() {
   );
 
   return (
-    !username && (
+    username && (
       <section>
         <h3>Choose Username</h3>
         <form onSubmit={onSubmit}>
