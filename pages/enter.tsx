@@ -114,7 +114,7 @@ function UsernameForm() {
   );
 
   return (
-    username && (
+    !username && (
       <section>
         <h3>Choose Username</h3>
         <form onSubmit={onSubmit}>
